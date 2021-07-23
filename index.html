@@ -1,16 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <h1>
-        Hello!
-    </h1>
-</body>
-<script src="script.js"></script>
+<html>
+  <head>
+    <title>Leslie's weather station</title>
+    <meta charset="UTF-8" />
+    <link  rel="stylesheet"
+    href="src/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+      <div class="col-6">
+        <form id=searchCity>
+          <input
+          type="text"
+          placeholder="Select a City"
+          autocomplete="off"
+          autofocus = "on"
+          id=inputCity />
+        </div>
+        <div class="col-3">
+          <input
+          type="submit"
+          value="Search" 
+          class="form-control btn btn-primary shadow-sm w-100"/>
+        </div>
+          </form>
+          <div class="col-3">
+            <button
+            class="form-control btn btn-primary shadow-sm w-100"
+            id="currentCityButton"
+            >
+            Current City
+            </button>
+          </div>
+      </div>
+        
+        <img src="img/Sun.png" alt="" class="sunheader" />
+      <h1>
+        
+      </h1>
+      <h2>
+        <span class="temperature" id="temperature"> </span>
+        <span class="units">
+          <a href="#" id="celsius">°C |</a>
+         <a href="#" id="fahrenheit">|°F</a>
+        </span>
+      </h2>
+      <p id="description">
+        Sunny
+      </p>
+      <p class="highlows" id="date">
+      </br>
+      <span id= "todayHigh">
+        35°
+      </span>
+      |
+      <span id="todayLow">
+       16°
+      </span>
+      </p>
+      <hr />
+      <div class="row hourforcast">
+          <div class="col-2 hourforcast">
+            <p>9am</p>
+            <img src="img/Sun.png" alt="" class="timeimg" />
+            <p>26°</p>
+          </div>
+          <div class="col-2 hourforcast">
+            <p>10am</p>
+            <img src="img/Sun.png" alt="" class="timeimg" />
+            <p>18°</p>
+          </div>
+          <div class="col-2 hourforcast">
+            <p>11am</p>
+            <img src="img/Sun.png" alt="" class="timeimg" />
+            <p>30°</p>
+          </div>
+          <div class="col-2 hourforcast">
+            <p>12pm</p>
+            <img src="img/Sun.png" alt="" class="timeimg" />
+            <p>33°</p>
+          </div>
+          <div class="col-2 hourforcast">
+            <p>1pm</p>
+            <img src="img/Sun.png" alt="" class="timeimg" />
+            <p>35°</p>
+          </div>
+          <div class="col-2 hourforcast">
+            <p>2pm</p>
+            <img src="img/Sun.png" alt="" class="timeimg" />
+            <p>35°</p>
+          </div>
+        </div>
+      <hr />
+      <div class="row weekforcast">
+        <div class="col-3 weekforcast"> <p>Thursday</p> </div>
+        <div class="col-3 weekforcast">
+          <img src="img/Sun.png" alt="" class="weekimg" />
+        </div>
+        <div class="col-1 weekforcast"> <p>26°</p></div>
+        <div class="col-1 weekforcast"> <p>8°</p></div>
+      </div>
+      <div class="row weekforcast">
+        <div class="col-3 weekforcast"> <p>Friday</p></div>
+        <div class="col-3 weekforcast">
+          <img src="img/Rain.jfif" alt="" class="weekimg" />
+        </div>
+        <div class="col-1 weekforcast"> <p>25°</p> </div>
+        <div class="col-1 weekforcast"> <p>3°</p> </div>
+      </div>
+      <div class="row weekforcast">
+        <div class="col-3 weekforcast"> <p>Saturday</p> </div>
+        <div class="col-3 weekforcast">
+          <img src="img/Rain.jfif" alt="" class="weekimg" />
+        </div>
+        <div class="col-1 weekforcast"> <p>27°</p> </div>
+        <div class="col-1 weekforcast"> <p>17°</p> </div>
+      </div>
+      <div class="row weekforcast">
+        <div class="col-3 weekforcast"> <p>Sunday</p></div>
+        <div class="col-3 weekforcast">
+          <img src="img/cloudy.jfif" alt="" class="weekimg" />
+        </div>
+        <div class="col-1 weekforcast"> <p>28°</p> </div>
+        <div class="col-1 weekforcast"> <p>14°</p> </div>
+      </div>
+      <div class="row weekforcast">
+        <div class="col-3 weekforcast"> <p>Monday</p> </div>
+        <div class="col-3 weekforcast">
+          <img src="img/Sun.png" alt="" class="weekimg" />
+        </div>
+        <div class="col-1 weekforcast"> <p>27°<p> </div>
+        <div class="col-1 weekforcast"> <p>16°</p> </div>
+      </div>
+    </div>
+    </div>
+  </body>
+  <script src="src/script.js"></script>
 </html>
