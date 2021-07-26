@@ -3,14 +3,24 @@
     padding: 20px;
     margin: 18px;
     max-width: 700px;
+    border-radius: 5px;
   }
   
   .sunheader {
     float: left;
-    width: 200px;
+    width: 250px;
     display: block;
   }
   
+  ul{
+    color: #ff3366;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      font-size: 17px;
+      list-style: none;
+  }
   h1,
   h2,
   p {
@@ -46,6 +56,7 @@
     text-decoration: none;
     color: #ff3366;
   }
+
   .timeimg {
     width: 50px;
     margin: 0;
@@ -71,4 +82,5 @@
     font-size: 15px;
     text-align: center;
     text-decoration: none;
+    padding: 25px;
   }
