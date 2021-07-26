@@ -21,6 +21,7 @@ let weekDay = weekDays[today.getDay()];
 
 date.innerHTML = `${weekDay} ${hour}:${minute}`;
 function displayWeather(response) {
+  console.log(response.data)
   document.querySelector("h1").innerHTML = response.data.name;
   document.querySelector("#temperature").innerHTML = Math.round(
     response.data.main.temp
@@ -29,6 +30,8 @@ function displayWeather(response) {
     response.data.weather[0].main;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
+  document.querySelector("#todayHigh").innerHTML = Math.round(response.data.main.temp_max);
+  document.querySelector("#todayLow").innerHTML = Math.round(response.data.main.temp_min);
 }
 function search(city) {
   let apiKey = "05d9d7923ffdfb53fdfae4f1f915dae5";

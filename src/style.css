@@ -39,11 +39,9 @@
     line-height: 30px;
     margin: 0;
   }
-  p {
-    font-size: 20px;
-  }
-  .highlows {
+  .highLow {
     text-align: right;
+    font-size: 17px;
   }
   #celsius,
   #fahrenheit,
