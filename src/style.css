@@ -68,10 +68,10 @@
   .weekimg {
     width: 35px;
   }
-  .hourforcast {
+  #hourforcast {
     text-align: center;
   }
-  .weekforcast {
+  #weekForecast {
     text-align: left;
     margin: auto;
   }

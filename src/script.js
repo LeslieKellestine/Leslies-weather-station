@@ -77,5 +77,48 @@ function searchLocation(position) {
 }
 let currentCityButton = document.querySelector("#currentCityButton");
 currentCityButton.addEventListener("click", getCurrentCity);
-
 search("Lisbon");
+
+function displayWeekForecast () {
+  let weekForecastElement = document.querySelector ("#weekForecast")
+  let days = ["Thu", "Fri", "Sat", "Sun"];
+  let weekForecastHTML = `<div class=row>`;
+  days.forEach(function (day) {
+    weekForecastHTML = weekForecastHTML +
+    `
+    <div class="col-3">
+    <p class="week-forcast-day"> ${day}</p> </div>
+                <div class="col-3">
+                  <img src="img/Sun.png" alt="" class="weekimg" />
+                </div>
+                <div class="col-3"> <p class="week-forcecast-max">26°</p></div>
+                <div class="col-3"> <p class="week-forcecast-min">8°</p></div>
+                `;
+  });
+  weekForecastHTML = weekForecastHTML + `</div>`;
+  weekForecastElement.innerHTML = weekForecastElement;
+  console.log(weekForecastHTML);
+}
+
+function displayHourForecast () {
+let hourForecastElement = document.querySelector ("#hourforcast")
+let hours = ["10am", "11am", "12pm", "1pm"];
+let hourForecastHTML = `<div class=row>`;
+hours.forEach(function (time) {
+  hourForecastHTML = hourForecastHTML +
+  `
+  <div class="col-2">
+    <p class="hourforcast-time"> ${time}</p>
+    <img src="img/Sun.png" alt="" class="timeimg" />
+    <p class="hourforcast-temp">26°</p>
+  </div>
+`;
+});
+hourForecastHTML = hourForecastHTML + `</div>`;
+hourForecastElement.innerHTML = hourForecastHTML;
+console.log (hourForecastHTML)
+}
+
+
+displayWeekForecast ();
+displayHourForecast ();
