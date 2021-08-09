@@ -20,6 +20,7 @@ let weekDays = [
 let weekDay = weekDays[today.getDay()];
 
 date.innerHTML = `${weekDay} ${hour}:${minute}`;
+
 function displayWeather(response) {
   document.querySelector("h1").innerHTML = response.data.name;
   document.querySelector("#temperature").innerHTML = Math.round(
@@ -32,6 +33,9 @@ function displayWeather(response) {
   document.querySelector("#todayHigh").innerHTML = Math.round(response.data.main.temp_max);
   document.querySelector("#todayLow").innerHTML = Math.round(response.data.main.temp_min);
   document.querySelector("#topimg").setAttribute ("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  
+  getForecast (response.data.coord)
+
 }
 function search(city) {
   let apiKey = "05d9d7923ffdfb53fdfae4f1f915dae5";
@@ -79,46 +83,97 @@ let currentCityButton = document.querySelector("#currentCityButton");
 currentCityButton.addEventListener("click", getCurrentCity);
 search("Lisbon");
 
-function displayWeekForecast () {
-  let weekForecastElement = document.querySelector ("#weekForecast")
-  let days = ["Thu", "Fri", "Sat", "Sun"];
-  let weekForecastHTML = `<div class=row>`;
-  days.forEach(function (day) {
-    weekForecastHTML = weekForecastHTML +
-    `
-    <div class="col-3">
-    <p class="week-forcast-day"> ${day}</p> </div>
-                <div class="col-3">
-                  <img src="img/Sun.png" alt="" class="weekimg" />
-                </div>
-                <div class="col-3"> <p class="week-forcecast-max">26°</p></div>
-                <div class="col-3"> <p class="week-forcecast-min">8°</p></div>
-                `;
-  });
-  weekForecastHTML = weekForecastHTML + `</div>`;
-  weekForecastElement.innerHTML = weekForecastElement;
-  console.log(weekForecastHTML);
+function getForecast(coordinates) {
+  let apiKey = "05d9d7923ffdfb53fdfae4f1f915dae5";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeekForecast);
+  axios.get(apiUrl).then(displayHourForecast);
 }
 
-function displayHourForecast () {
+function formatHourForecast (timestamp) {
+  let time = new Date(timestamp * 1000);
+  let forecastHour = time.getHours();
+  let forecastHours = [
+    "1:00",
+    "2:00",
+    "3:00",
+    "4:00",
+    "5:00",
+    "6:00",
+    "7:00",
+    "8:00",
+    "9:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+    "23:00",
+    "24:00",
+  ];
+  return forecastHours[forecastHour];
+}
+
+function displayHourForecast (response) {
+let hourForecast = response.data.hourly;
 let hourForecastElement = document.querySelector ("#hourforcast")
-let hours = ["10am", "11am", "12pm", "1pm"];
 let hourForecastHTML = `<div class=row>`;
-hours.forEach(function (time) {
+hourForecast.forEach(function (hourForecastTime, index) {
+  if (index < 6) {
   hourForecastHTML = hourForecastHTML +
   `
   <div class="col-2">
-    <p class="hourforcast-time"> ${time}</p>
-    <img src="img/Sun.png" alt="" class="timeimg" />
-    <p class="hourforcast-temp">26°</p>
+    <p class="hourforcast-time"> ${formatHourForecast(hourForecastTime.dt)}</p>
+    <img src="https://openweathermap.org/img/wn/${hourForecastTime.weather[0].icon}@2x.png"
+          alt=""
+          class="timeimg" />
+    <p class="hourforcast-temp">${Math.round(hourForecastTime.temp)}°</p>
   </div>
 `;
+  }
 });
 hourForecastHTML = hourForecastHTML + `</div>`;
 hourForecastElement.innerHTML = hourForecastHTML;
-console.log (hourForecastHTML)
+console.log (hourForecastHTML);
+}
+
+function formatWeekDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  return days[day];
+}
+
+function displayWeekForecast (response) {
+  let weekForecast = response.data.daily;
+  let weekForecastElement = document.querySelector ("#weekForecast")
+  let weekForecastHTML = `<div class=row>`;
+  weekForecast.forEach(function (weekForecastDay, index ) {
+    if (index < 6) {
+    weekForecastHTML = weekForecastHTML +
+    `
+    <div class="col-3">
+    <p class="week-forcast-day"> ${formatWeekDay(weekForecastDay.dt)}</p> </div>
+                <div class="col-3">
+                  <img src="https://openweathermap.org/img/wn/${weekForecastDay.weather[0].icon}@2x.png"
+                  alt=""
+                  class="weekimg" />
+                </div>
+                <div class="col-3"> <p class="week-forcecast-max">${Math.round(weekForecastDay.temp.max)}°</p></div>
+                <div class="col-3"> <p class="week-forcecast-min">${Math.round (weekForecastDay.temp.min)}°</p></div>
+                `;
+              }
+              });
+  weekForecastHTML = weekForecastHTML + `</div>`;
+  weekForecastElement.innerHTML = weekForecastHTML;
 }
 
 
-displayWeekForecast ();
-displayHourForecast ();
