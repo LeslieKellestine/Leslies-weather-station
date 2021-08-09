@@ -52,23 +52,6 @@ function find(event) {
 let selectCity = document.querySelector("#searchCity");
 selectCity.addEventListener("submit", find);
 
-function changeToFahrenheit(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  let temperature = temperatureElement.innerHTML;
-  temperatureElement.innerHTML = Math.round((temperature * 9) / 5 + 32);
-}
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", changeToFahrenheit);
-
-function changeToCelsius(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  let temperature = temperatureElement.innerHTML;
-  temperatureElement.innerHTML = 23;
-}
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", changeToCelsius);
 
 function getCurrentCity(event) {
   event.preventDefault();
