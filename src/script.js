@@ -1,3 +1,4 @@
+
 let today = new Date();
 let date = document.querySelector("#date");
 let hour = today.getHours();
@@ -125,7 +126,6 @@ hourForecast.forEach(function (hourForecastTime, index) {
 });
 hourForecastHTML = hourForecastHTML + `</div>`;
 hourForecastElement.innerHTML = hourForecastHTML;
-console.log (hourForecastHTML);
 }
 
 function formatWeekDay(timestamp) {
